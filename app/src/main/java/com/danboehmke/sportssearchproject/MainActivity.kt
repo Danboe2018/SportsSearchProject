@@ -34,9 +34,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun searchTeams(text: String) {
+    fun searchTeams(text: String): String {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
+        var resp = ""
 
         val url = "https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=$text"
 
@@ -44,23 +45,26 @@ class MainActivity : AppCompatActivity() {
         val stringRequest = StringRequest(
             com.android.volley.Request.Method.GET, url,
             Response.Listener<String> { response ->
-                // Display the first 500 characters of the response string.
                 val jsonObject = JSONObject(response)
                 val teamsJson = jsonObject.getJSONArray("teams")
                 for (i in 0 until teamsJson.length()) {
                     val first = teamsJson.getJSONObject(i)
                     searchHistory(first.getInt("idTeam"))
                 }
+                resp = response
             },
             Response.ErrorListener { textView.text = "That didn't work!" })
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest)
+
+        return resp
     }
 
-    fun searchHistory(num: Int) {
+    fun searchHistory(num: Int) : String {
         val textView = findViewById<TextView>(R.id.outputText)
-        // Instantiate the RequestQueue.
+        var resp = ""
+
         val queue = Volley.newRequestQueue(this)
 
         val url = "https://www.thesportsdb.com/api/v1/json/1/eventslast.php?id=$num"
@@ -69,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         val stringRequest = StringRequest(
             com.android.volley.Request.Method.GET, url,
             Response.Listener<String> { response ->
-                // Display the first 500 characters of the response string.
                 val jsonObject = JSONObject(response)
                 if (!jsonObject.get("results").equals(null)) {
                     val resultsJson = jsonObject.getJSONArray("results")
@@ -79,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     stringBuilder!!.append("\n")
                 }
-
+                resp = response
 
                 textView.text = "Last 5 Games: ${stringBuilder!!}"
                 textView.setMovementMethod(ScrollingMovementMethod())
@@ -89,5 +92,7 @@ class MainActivity : AppCompatActivity() {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest)
+
+        return resp
     }
 }
