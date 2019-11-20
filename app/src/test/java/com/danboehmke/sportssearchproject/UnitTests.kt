@@ -1,8 +1,7 @@
 package com.danboehmke.sportssearchproject
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.mockito.Mockito
 
 /**
@@ -18,8 +17,10 @@ class UnitTest {
     }
 
     @Test
-    fun test_search_teams(){
-        mainActivity.searchTeams("Eagles")
+    fun test_search_teams() {
+        val testResp = mainActivity.searchTeams("Eagles")
+        println("Test Resp: $testResp")
         assert(true)
     }
+
 }

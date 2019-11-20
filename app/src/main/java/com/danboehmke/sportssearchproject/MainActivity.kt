@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         var resp = ""
 
+        println("Search Team Starts")
         val url = "https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=$text"
 
         // Request a string response from the provided URL.
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                     searchHistory(first.getInt("idTeam"))
                 }
                 resp = response
+                println(response)
             },
             Response.ErrorListener { textView.text = "That didn't work!" })
 
