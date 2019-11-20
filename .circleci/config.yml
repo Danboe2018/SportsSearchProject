@@ -10,10 +10,10 @@ jobs:
       - checkout
       - run:
           name: Download Dependencies
-          command: 
-            - ./gradlew androidDependencies
-            - ./gradlew :app:assembleDebug
-            - ./gradlew :app:assembleDebugAndroidTest
+          command: ./gradlew androidDependencies
+      - run:
+          name: Assemble Debug
+          command: ./gradlew :app:assembleDebug
       - save_cache:
           paths:
             - ~/.gradle
