@@ -17,6 +17,7 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     var stringBuilder: StringBuilder? = null
+    var volley: Volley? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         searchBut.setOnClickListener(View.OnClickListener {
             stringBuilder!!.clear()
             searchTeams(searchText.text.toString())
-            Toast.makeText(this,"Loading Results.",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Loading Results.", Toast.LENGTH_LONG).show()
         })
     }
 
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         return resp
     }
 
-    fun searchHistory(num: Int) : String {
+    fun searchHistory(num: Int): String {
         val textView = findViewById<TextView>(R.id.outputText)
         var resp = ""
 

@@ -1,8 +1,11 @@
 package com.danboehmke.sportssearchproject
 
+import com.android.volley.toolbox.Volley
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,7 +13,16 @@ import org.mockito.Mockito
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class UnitTest {
-    val mainActivity = Mockito.mock(MainActivity::class.java)
+    @Mock
+    lateinit var mainActivity: MainActivity
+    lateinit var volley: Volley
+
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        this.mainActivity = MainActivity()
+    }
+
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
