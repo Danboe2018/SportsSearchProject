@@ -31,7 +31,7 @@ class UnitTest {
     @Test
     fun test_search_teams() {
         // val testResp = mainActivity.searchTeams("Eagles")
-        println("Test Resp: $testResp")
+        // println("Test Resp: $testResp")
         assert(true)
     }
 
